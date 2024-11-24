@@ -1,0 +1,74 @@
+def backtrack(tablero, barcos, fila_demandas, columna_demandas, indice_barco, min_demanda_incumplida):
+    if indice_barco == len(barcos):
+        demanda_incumplida = calcular_demanda_incumplida(tablero, fila_demandas, columna_demandas)
+        return min(min_demanda_incumplida, demanda_incumplida)
+    
+    barco = barcos[indice_barco]
+    for fila in range(len(tablero)):
+        for col in range(len(tablero[0])):
+            if puede_colocar_barco(tablero, fila, col, barco):
+                colocar_barco(tablero, fila, col, barco)
+                
+                min_demanda_incumplida = backtrack(tablero, barcos, fila_demandas, columna_demandas, indice_barco + 1, min_demanda_incumplida)
+
+                quitar_barco(tablero, fila, col, barco)
+
+                if min_demanda_incumplida == 0:  
+                    return 0
+    
+    return min_demanda_incumplida
+
+
+def calcular_demanda_incumplida(tablero, fila_demandas, columna_demandas):
+    fila_ocupadas = [sum(1 for c in fila if c != 0) for fila in tablero]
+    columna_ocupadas = [sum(1 for f in tablero if f[c] != 0) for c in range(len(tablero[0]))]
+    
+    demanda_incumplida = 0
+    for i in range(len(fila_demandas)):
+        demanda_incumplida += abs(fila_demandas[i] - fila_ocupadas[i])
+
+    for i in range(len(columna_demandas)):
+        demanda_incumplida += abs(columna_demandas[i] - columna_ocupadas[i])
+    
+    return demanda_incumplida
+
+
+def puede_colocar_barco(tablero, fila, col, barco):
+    if col + barco - 1 < len(tablero[0]):  # Verificar si cabe horizontalmente
+        if all(tablero[fila][col + i] == 0 for i in range(barco)):  # Verificar si está vacío
+            return True
+
+    if fila + barco - 1 < len(tablero):  # Verificar si cabe verticalmente
+        if all(tablero[fila + i][col] == 0 for i in range(barco)):  # Verificar si está vacío
+            return True
+
+    return False
+
+
+def colocar_barco(tablero, fila, col, barco):
+    if col + barco - 1 < len(tablero[0]):
+        for i in range(barco):
+            tablero[fila][col + i] = 1
+    elif fila + barco - 1 < len(tablero):
+        for i in range(barco):
+            tablero[fila + i][col] = 1
+
+
+def quitar_barco(tablero, fila, col, barco):
+    # Elimina el barco del tablero
+    if col + barco - 1 < len(tablero[0]):
+        for i in range(barco):
+            tablero[fila][col + i] = 0
+    elif fila + barco - 1 < len(tablero): 
+        for i in range(barco):
+            tablero[fila + i][col] = 0 
+
+
+def resolver_problema(n, m, barcos, fila_demandas, columna_demandas):
+    tablero = [[0] * m for _ in range(n)]
+    barcos_restantes = sorted(barcos, reverse=True)  # Ordenar los barcos por tamaño (de mayor a menor)
+    min_demanda_incumplida = float('inf')  
+
+    min_demanda_incumplida = backtrack(tablero, barcos_restantes, fila_demandas, columna_demandas, 0, min_demanda_incumplida)
+    
+    return min_demanda_incumplida,tablero
