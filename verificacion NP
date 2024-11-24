@@ -1,0 +1,27 @@
+def verificar_solucion(tablero, filas_demandas, columnas_demandas):
+    n = len(tablero)      
+    m = len(tablero[0])  
+    
+    for i in range(n):
+        casilleros_ocupados = sum(1 for j in range(m) if tablero[i][j] == 1)
+        if casilleros_ocupados != filas_demandas[i]:
+            return False 
+
+    for j in range(m):
+        casilleros_ocupados = sum(1 for i in range(n) if tablero[i][j] == 1)
+        if casilleros_ocupados != columnas_demandas[j]:
+            return False 
+
+    for i in range(n):
+        for j in range(m):
+            if tablero[i][j] == 1:  # Si hay un barco en la posición (i, j)
+                if i > 0 and tablero[i-1][j] == 1:  
+                    return False
+                if i < n-1 and tablero[i+1][j] == 1: 
+                    return False
+                if j > 0 and tablero[i][j-1] == 1: 
+                    return False
+                if j < m-1 and tablero[i][j+1] == 1:  
+                    return False
+                
+    return True 
