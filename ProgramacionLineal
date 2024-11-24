@@ -1,0 +1,18 @@
+import pulp
+
+def batalla_naval_programacion_lineal(n, m, barcos, restricciones_filas, restricciones_columnas):
+
+    prob = pulp.LpProblem("Batalla_Naval", pulp.LpMinimize)
+
+    x = pulp.LpVariable.dicts("x", (range(n), range(m)), cat='Binary')
+
+    for i in range(n):
+        prob += pulp.lpSum(x[i][j] for j in range(m)) == restricciones_filas[i]
+
+    for j in range(m):
+        prob += pulp.lpSum(x[i][j] for i in range(n)) == restricciones_columnas[j]
+
+    prob += 0
+    prob.solve()
+    solucion = [[pulp.value(x[i][j]) for j in range(m)] for i in range(n)]
+    return solucion
