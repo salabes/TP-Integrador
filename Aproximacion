@@ -1,0 +1,69 @@
+def colocar_barco_en_mejor_fila_columna(tablero, barcos, fila_demandas, columna_demandas):
+    n = len(tablero)
+    m = len(tablero[0])
+
+    barcos = sorted(barcos, reverse=True)
+    barco_id = 1
+
+    while barcos:
+        mejor_fila_columna = None
+        mejor_diferencia = float('inf')
+        max_demanda = max(fila_demandas) 
+
+        for i in range(n):
+            if fila_demandas[i] == max_demanda:  
+                for j in range(m):
+                    if puede_colocar_barco(tablero, i, j, barcos[0]):
+                        # Calculamos la diferencia en la demanda de la fila
+                        diferencia = abs(fila_demandas[i] - sum(1 for c in tablero[i] if c != 0))
+                        if diferencia < mejor_diferencia:
+                            mejor_diferencia = diferencia
+                            mejor_fila_columna = (i, j)
+
+        if mejor_fila_columna:
+            colocar_barco(tablero, mejor_fila_columna[0], mejor_fila_columna[1], barcos[0], barco_id)
+            fila_demandas[mejor_fila_columna[0]] -= barcos[0] 
+            barcos.pop(0)  
+            barco_id += 1 
+
+        else:
+            break
+
+    return tablero
+
+
+def puede_colocar_barco(tablero, fila, col, barco):
+
+    if col + barco <= len(tablero[0]): 
+        if all(tablero[fila][col + i] == 0 for i in range(barco)):
+            if fila > 0 and any(tablero[fila - 1][col + i] != 0 for i in range(barco)):  
+                return False
+            if fila < len(tablero) - 1 and any(tablero[fila + 1][col + i] != 0 for i in range(barco)): 
+                return False
+            if col > 0 and tablero[fila][col - 1] != 0: 
+                return False
+            if col + barco < len(tablero[0]) and tablero[fila][col + barco] != 0: 
+                return False
+            return True
+
+    if fila + barco <= len(tablero):  
+        if all(tablero[fila + i][col] == 0 for i in range(barco)):
+            if col > 0 and any(tablero[fila + i][col - 1] != 0 for i in range(barco)): 
+                return False
+            if col < len(tablero[0]) - 1 and any(tablero[fila + i][col + 1] != 0 for i in range(barco)):  
+                return False
+            if fila > 0 and tablero[fila - 1][col] != 0: 
+                return False
+            if fila + barco < len(tablero) and tablero[fila + barco][col] != 0:  
+                return False
+            return True
+
+    return False
+
+def colocar_barco(tablero, fila, col, barco, barco_id):
+    if col + barco <= len(tablero[0]): 
+        for i in range(barco):
+            tablero[fila][col + i] = barco_id  
+    elif fila + barco <= len(tablero): 
+        for i in range(barco):
+            tablero[fila + i][col] = barco_id  
