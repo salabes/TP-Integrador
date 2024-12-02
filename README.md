@@ -8,7 +8,8 @@ Para correr el programa y poder ejecutarle pruebas debemos hacer los siguientes 
 
 Un ejemplo seria:  "./programa.py 100.txt ResultadosEsperados.txt"
 
-2-El set de datos debe tener esta estructura: 
+2-El set de datos debe tener esta estructura:
+ 
 #Los valores de las monedas de la fila se muestran tal cual su orden correspondiente, separados por ;
 72;165;794;892;880;341;882;570;679;725;979;375;459;603;112;436;587;699;681;83
 
