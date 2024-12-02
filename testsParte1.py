@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
+
 from parte1 import elegir_monedas
+import sys
 import time
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,7 +9,9 @@ import numpy as np
 
 def main():
     tiempos = []
-    tamanos = [100,1000,10000,20000]
+    tamanos = [100, 1000, 10000, 20000]
+
+    # Llamamos a las funciones de prueba y almacenamos los tiempos
     prueba1()
     prueba2()
     prueba3()
@@ -15,6 +20,8 @@ def main():
     pruebaCatedra()
     pruebaCatedra2()
     pruebaCatedra3()
+
+    # Medir el tiempo de las pruebas Cátedra
     tiempo1 = pruebaCatedra4()
     tiempo2 = pruebaCatedra5()
     tiempo3 = pruebaCatedra6()
@@ -23,14 +30,44 @@ def main():
     tiempos.append(tiempo2)
     tiempos.append(tiempo3)
     tiempos.append(tiempo4)
-    # Datos empíricos (tamaños de entrada y resultados de tiempos)
-    x = np.array(tamanos)  # Tamaños de entrada
-    results = {}  # Tiempos de ejecución
-
-    # Definición de la función de ajuste lineal
-    f = lambda x, c1, c2: c1 * x + c2
 
 
+    # Realizar el ajuste lineal
+    coeficientes = np.polyfit(tamanos, tiempos, 1)
+
+    # Los coeficientes son la pendiente (m) y la intersección (b)
+    pendiente = coeficientes[0]
+    interseccion = coeficientes[1]
+
+    print(f"Pendiente del ajuste lineal: {pendiente}")
+
+    # Graficar los tiempos de ejecución vs tamaño de entrada
+    plt.figure(figsize=(10, 6))
+    plt.plot(tamanos, tiempos, 'o-', label="Tiempos Medidos")
+    plt.xlabel("Tamaño de Entrada")
+    plt.ylabel("Tiempo de Ejecución (segundos)")
+    plt.title("Correlación entre Tamaño de Entrada y Tiempo de Ejecución")
+    plt.grid(True)
+
+    # Ajuste lineal con la técnica de cuadrados mínimos (modelo O(n))
+    ajuste = np.polyval(coeficientes, tamanos)  # Aplicar el modelo a los tamaños
+
+    # Graficar el ajuste
+    plt.plot(tamanos, ajuste, 'r--', label="Ajuste Lineal (O(n))")
+    plt.legend()
+    plt.show()
+
+    # Calcular el error absoluto entre los tiempos observados y los tiempos predichos
+    error_abs = np.abs(np.array(tiempos) - ajuste)
+
+    # Graficar el error absoluto
+    plt.figure(figsize=(10, 6))
+    plt.plot(tamanos, error_abs, 'o-', label="Error Absoluto")
+    plt.xlabel("Tamaño de Entrada")
+    plt.ylabel("Error Absoluto (segundos)")
+    plt.title("Error Absoluto vs Tamaño de Entrada")
+    plt.grid(True)
+    plt.show()
 
 def prueba1():
     print("Caso Alta Variabilidad")
@@ -89,7 +126,7 @@ def prueba5():
 
 def pruebaCatedra():
     print("Prueba catedra: 1")
-    archivo = 'pruebas/TP1/20.txt'  
+    archivo = 'pruebas/20.txt'  
     monedas = leerMonedasDesdeArchivo(archivo)
     pasos,ganancia_sophia = buscarResultadosEsperados('20.txt')
     ganancia_recibida,pasos_recibidos = elegir_monedas(monedas)
@@ -107,7 +144,7 @@ def pruebaCatedra():
 
 def pruebaCatedra2():
     print("Prueba catedra: 2")
-    archivo = 'pruebas/TP1/25.txt'  
+    archivo = 'pruebas/25.txt'  
     monedas = leerMonedasDesdeArchivo(archivo)
     pasos,ganancia_sophia = buscarResultadosEsperados('25.txt')
     ganancia_recibida,pasos_recibidos = elegir_monedas(monedas)
@@ -124,7 +161,7 @@ def pruebaCatedra2():
 
 def pruebaCatedra3():
     print("Prueba catedra: 3")
-    archivo = 'pruebas/TP1/50.txt'  
+    archivo = 'pruebas/50.txt'  
     monedas = leerMonedasDesdeArchivo(archivo)
     pasos,ganancia_sophia = buscarResultadosEsperados('50.txt')
     ganancia_recibida,pasos_recibidos = elegir_monedas(monedas)
@@ -142,7 +179,7 @@ def pruebaCatedra3():
 
 def pruebaCatedra4():
     print("Prueba catedra: 4")
-    archivo = 'pruebas/TP1/100.txt'  
+    archivo = 'pruebas/100.txt'  
     monedas = leerMonedasDesdeArchivo(archivo)
     pasos,ganancia_sophia = buscarResultadosEsperados('100.txt')
     start = time.time()
@@ -164,7 +201,7 @@ def pruebaCatedra4():
 
 def pruebaCatedra5():
     print("Prueba catedra: 5")
-    archivo = 'pruebas/TP1/1000.txt'  
+    archivo = 'pruebas/1000.txt'  
     monedas = leerMonedasDesdeArchivo(archivo)
     pasos,ganancia_sophia = buscarResultadosEsperados('1000.txt')
     start = time.time()
@@ -186,7 +223,7 @@ def pruebaCatedra5():
 
 def pruebaCatedra6():
     print("Prueba catedra: 6")
-    archivo = 'pruebas/TP1/10000.txt'  
+    archivo = 'pruebas/10000.txt'  
     monedas = leerMonedasDesdeArchivo(archivo)
     pasos,ganancia_sophia = buscarResultadosEsperados('10000.txt')
     start = time.time()
@@ -208,7 +245,7 @@ def pruebaCatedra6():
 
 def pruebaCatedra7():
     print("Prueba catedra: 7")
-    archivo = 'pruebas/TP1/20000.txt'  
+    archivo = 'pruebas/20000.txt'  
     monedas = leerMonedasDesdeArchivo(archivo)
     pasos,ganancia_sophia = buscarResultadosEsperados('20000.txt')
     start = time.time()
@@ -239,7 +276,7 @@ def leerMonedasDesdeArchivo(archivo):
 
 
 def buscarResultadosEsperados(archivoABuscar):
-    with open('pruebas/TP1/Resultados Esperados.txt', 'r') as file:
+    with open('pruebas/ResultadosEsperados.txt', 'r') as file:
         lineas = file.readlines()
         ahora = False 
         monedas = []
