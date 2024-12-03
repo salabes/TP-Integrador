@@ -6,7 +6,7 @@ def leer_archivo(path):
     longitudes_barcos = []
 
     # Abrimos el archivo en modo lectura
-    with open(path, 'r') as f:
+    with open(f'pruebas/TP3/{path}', 'r') as f:
         # Leemos todas las líneas del archivo
         lineas = f.readlines()
 
