@@ -1,0 +1,125 @@
+
+def test01_3x3x2():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('3x3x2.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test02_5x5x6():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('5x5x6.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test03_8x7x10():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('8x7x10.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test04_10x3x3():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('10x3x3.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test05_10x10x10():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('10x10x10.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test06_12x12x21():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('12x12x21.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test07_15x10x15():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('15x10x15.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test08_20x20x20():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('20x20x20.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+def test09_30x25x25():
+
+    demandas_filas, demandas_columnas, barcos = leer_archivo('30x25x25.txt')
+    n = len(demandas_filas)
+    m = len(demandas_columnas)
+
+    # Medir tiempo con timeit
+    start_time = timeit.default_timer()
+    demanda_cumplida , tablero = resolver_problema(n,m,barcos,demandas_filas,demandas_columnas)
+    end_time = timeit.default_timer()
+    time = end_time - start_time
+    return time,demanda_cumplida,tablero
+
+time,demanda_cumplida,tablero = test01_3x3x2()
+
+print(f"Tiempo de ejecución: {time} segundos")
+
+imprimir_tablero(tablero)
+
+print(demanda_cumplida)
