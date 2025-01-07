@@ -2,7 +2,7 @@
 import sys
 
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 2:
         print("Por favor, proporciona exactamente 2 argumentos.")
         sys.exit(1)
 
