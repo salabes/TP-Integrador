@@ -5,18 +5,16 @@ from lectorArchivos import leer_archivo
 from backtracking import resolver_problema
 
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 2:
         print("Por favor, proporciona exactamente 2 argumentos.")
         sys.exit(1)
 
     # Los argumentos se pasan como cadenas, puedes convertirlos según sea necesario
     arg1 = sys.argv[1]
-    arg2 = sys.argv[2]
 
     time,demanda_cumplida,tablero = prueba(arg1)
 
     print(f"Tiempo de ejecución: {time} segundos")
-    print(f"demanda solicitada : {arg2}")
     print(f"demanda obtenida : {demanda_cumplida}")
 
 
