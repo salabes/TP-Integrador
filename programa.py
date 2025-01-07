@@ -8,22 +8,17 @@ def main():
 
     # Los argumentos se pasan como cadenas, puedes convertirlos según sea necesario
     arg1 = sys.argv[1]
-    arg2 = sys.argv[2]
 
-    prueba(arg1,arg2)
+    prueba(arg1)
 
 
-def prueba(setDatos,resultados):
+def prueba(setDatos):
     archivo = f'pruebas/{setDatos}'  
     monedas = leerMonedasDesdeArchivo(archivo)
-    _,ganancia_sophia = buscarResultadosEsperados(setDatos,resultados)
     ganancia_recibida,ganancia_mateo= elegir_monedas(monedas)
-    correcto = False
 
-    if ganancia_recibida  > ganancia_mateo:
-        correcto = True
 
-    print(correcto)
+    print(ganancia_recibida)
 
 
 def leerMonedasDesdeArchivo(archivo):
@@ -32,29 +27,6 @@ def leerMonedasDesdeArchivo(archivo):
         contenido = file.read().strip()
         monedas = list(map(int, contenido.split(';')))
     return monedas
-
-
-def buscarResultadosEsperados(archivoABuscar,resultados):
-    with open(f'pruebas/{resultados}', 'r') as file:
-        lineas = file.readlines()
-        ahora = False 
-        monedas = []
-        cont = 0
-        for linea in lineas:
-            linea = linea.strip()
-            if ahora:
-                if linea.startswith("Ganancia de Sophia:"):
-                    ganancia_sophia = linea.split(":")[1].strip()
-                    break 
-                else:
-                    monedas.extend(linea.split(';'))
-                    if cont == 0:
-                        monedas[0] = " " + monedas[0]
-                        cont += 1
-            if linea == archivoABuscar:
-                ahora = True
-                continue
-    return monedas,ganancia_sophia
 
 def elegir_monedas(monedas):
     sophia_puntuacion = 0
