@@ -17,7 +17,7 @@ def prueba(setDatos):
     monedas = leerMonedasDesdeArchivo(archivo)
     ganancia_recibida,ganancia_mateo= elegir_monedas(monedas)
 
-
+    print("ganancia sophia: ")
     print(ganancia_recibida)
 
 
