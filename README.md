@@ -2,11 +2,10 @@
 
 Para correr el programa y poder ejecutarle pruebas debemos hacer los siguientes pasos:
 
-1-El programa se core con el siguiente comando: ./programa.py [setdatos] [resultadosEsperados]
+1-El programa se core con el siguiente comando: ./programa.py [setdatos]
 
-[setDatos] = "nombreArchivo.txt" [ResultadosEsperados] = "nombreArchivo.txt"
-
-Un ejemplo seria:  "./programa.py 100.txt ResultadosEsperados.txt"
+[setDatos] = "nombreArchivo.txt"
+Un ejemplo seria:  "./programa.py 100.txt"
 
 2-El set de datos debe tener esta estructura:
  
@@ -15,23 +14,9 @@ Un ejemplo seria:  "./programa.py 100.txt ResultadosEsperados.txt"
 
 Es exactamente la misma esctructura que los archivos de prueba de la catedra.
 
-3- El archivo resultadosEsperados debe tener este formato:
+3-En caso de no poder correr el problema por no tener autorizado el codigo: chmod +x programa.py
 
-Es posible que en función del algoritmo que se decida utilizar, estas no sean las ganancias que obtengan. Tomen esto como un ejemplo, y lo importante es que Sophia siempre gane.
-
-20.txt
-Última moneda para Sophia; Primera moneda para Mateo; Última moneda para Sophia; Primera moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Primera moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo
-Ganancia de Sophia: 7165
-
-25.txt
-Última moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia; Primera moneda para Mateo; Última moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Primera moneda para Mateo; Primera moneda para Sophia; Primera moneda para Mateo; Última moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia; Primera moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia
-Ganancia de Sophia: 9635
-
-...
-
-4-En caso de no poder correr el problema por no tener autorizado el codigo: chmod +x programa.py
-
-5-Los archivos de Prueba deben encontrarse en una carpeta llamada pruebas ubicada en el mismo directorio que el archivo programa.py
+4-Los archivos de Prueba deben encontrarse en una carpeta llamada pruebas ubicada en el mismo directorio que el archivo programa.py
 
 ACLARACION.
 
