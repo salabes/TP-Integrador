@@ -1,10 +1,9 @@
 # TP-Integrador
 Para correr el programa y poder ejecutarle pruebas debemos hacer los siguientes pasos:
 
-1-El programa se core con el siguiente comando: ./programa.py [setdatos] [demandaSolicitada]
+1-El programa se core con el siguiente comando: ./programa.py [setdatos]
 
-[setDatos] = "nombreArchivo.txt" [demandaSolicitada] = "4"
-
+[setDatos] = "nombreArchivo.txt"
 Un ejemplo seria: "./programa.py 100.txt 4"
 
 2-El set de datos debe tener esta estructura:
