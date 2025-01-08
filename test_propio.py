@@ -16,10 +16,10 @@ def probar_ejemplos():
     ]
 
     for descripcion, monedas in ejemplos:
-        sophia_monedas, ganancia_sophia, mateo_monedas, mateo_ganancia, jugadas = parte2.obtener_maxima_monedas(monedas)
-        mostrar_resultado(descripcion, monedas, sophia_monedas, ganancia_sophia, mateo_monedas, mateo_ganancia, jugadas)
+        ganancia_sophia, sophia_monedas, mateo_ganancia, mateo_monedas = parte2.obtener_maxima_monedas(monedas)
+        mostrar_resultado(descripcion, monedas, sophia_monedas, ganancia_sophia, mateo_monedas, mateo_ganancia)
 
-def mostrar_resultado(descripcion, monedas, sophia_monedas, ganancia_sophia, mateo_monedas, mateo_ganancia, jugadas):
+def mostrar_resultado(descripcion, monedas, sophia_monedas, ganancia_sophia, mateo_monedas, mateo_ganancia):
     assert ganancia_sophia >= mateo_ganancia, (
         f"Error en '{descripcion}': Sophia no tiene más ganancia que Mateo.\n"
         f"Ganancia Sophia: {ganancia_sophia}, Ganancia Mateo: {mateo_ganancia}\n"
@@ -27,13 +27,11 @@ def mostrar_resultado(descripcion, monedas, sophia_monedas, ganancia_sophia, mat
     )
     print(f"Ejemplo: {descripcion}")
     print(f"monedas: {monedas}")
-    print(jugadas)
     print(f"Sophia_monedas: {sophia_monedas}")
     print(f"Sophia_Ganancia: {ganancia_sophia}")
     print(f"Mateo_monedas: {mateo_monedas}")
     print(f"Mateo_Ganancia: {mateo_ganancia}")
     print()
-
 
 if __name__ == "__main__":
     probar_ejemplos()
