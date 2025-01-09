@@ -35,12 +35,6 @@ def decidir_extremo(monedas, i, j, valores_acumulados):
     else:
         return elegir_derecha
 
-def contar_monedas(monedas, monedas_jugador):
-    monedas_jugador = [monedas[i] for i in monedas_jugador]
-    ganancia_jugador = sum(monedas_jugador)
-
-    return ganancia_jugador, monedas_jugador
-
 def recuperar_elecciones_optimas(monedas, valores_acumulados):
     i = 0
     j = len(monedas) - 1
