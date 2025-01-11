@@ -38,12 +38,12 @@ class TestMonedasElegidas(unittest.TestCase):
     def test_monedas_elegidas(self):
         for archivo, esperado in RESULTADOS_ESPERADOS.items():
             monedas = obtener_datos.obtener_monedas(archivo)
-            sophia_ganancia, sophia_moneda, mateo_ganancia, mateo_monedas = parte2.obtener_maxima_monedas(monedas)
+            sophia_ganancia, sophia_moneda, mateo_ganancia, mateo_monedas, jugadas = parte2.obtener_maxima_monedas(monedas)
 
             self.assertEqual(sophia_moneda, esperado["Sophia"], f"Error en Sophia para {archivo}")
             self.assertEqual(mateo_monedas, esperado["Mateo"], f"Error en Mateo para {archivo}")
             self.assertEqual(sophia_ganancia, esperado["Ganancia Sophia"], f"Error en la ganancia de Sophia para {archivo}")
             self.assertEqual(mateo_ganancia, esperado["Ganancia Mateo"], f"Error en la ganancia de Mateo para {archivo}")
-
+            
 if __name__ == "__main__":
     unittest.main()

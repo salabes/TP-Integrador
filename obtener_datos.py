@@ -25,14 +25,13 @@ def obtener_resultados(ruta):
         jugadas_mateo = []
         ganancia_sophia = 0
         ganancia_mateo = 0
-
+        
         for linea in lineas[1:]:
             if "Ganancia Sophia" in linea:
                 ganancia_sophia = int(linea.split(":")[1].strip())  
             elif "Ganancia Mateo" in linea:
                 ganancia_mateo = int(linea.split(":")[1].strip())
             elif ";" in linea:
-
                 jugadas = linea.split(";") 
                 for jugada in jugadas:
                     jugada = jugada.strip()
@@ -52,12 +51,3 @@ def obtener_resultados(ruta):
             "Ganancia Mateo": ganancia_mateo
         }
     return resultados
-
-
-
-
-
-
-
-
-

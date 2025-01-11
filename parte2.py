@@ -38,19 +38,21 @@ def decidir_extremo(monedas, i, j, valores_acumulados):
 def recuperar_elecciones_optimas(monedas, valores_acumulados):
     i = 0
     j = len(monedas) - 1
-    jugada_sophia = []
-    jugada_mateo = []
+    jugadas_sophia = []
+    jugadas_mateo = []
     ganancia_esperanza = valores_acumulados[i][j]
+    jugadas = []
 
-    jugada_sophia, jugada_mateo =_recuperar_elecciones_optimas(monedas, valores_acumulados, i, j, jugada_sophia, jugada_mateo, ganancia_esperanza)
+    jugada_sophia, jugada_mateo =_recuperar_elecciones_optimas(monedas, valores_acumulados, i, j, jugadas_sophia, jugadas_mateo, jugadas, ganancia_esperanza)
     
     ganancia_sophia = sum(jugada_sophia)
     ganancia_mateo = sum(jugada_mateo)
+    jugadas_totales = registrar_jugadas(jugadas)
 
-    return ganancia_sophia, jugada_sophia, ganancia_mateo, jugada_mateo
+    return ganancia_sophia, jugada_sophia, ganancia_mateo, jugada_mateo, jugadas_totales
 
 
-def _recuperar_elecciones_optimas(monedas, valores_acumulados, i, j, monedas_sophia, monedas_mateo, ganancia_esperanza):
+def _recuperar_elecciones_optimas(monedas, valores_acumulados, i, j, monedas_sophia, monedas_mateo, jugadas, ganancia_esperanza):
     ganancia_actual = 0
 
     while True:
@@ -60,6 +62,7 @@ def _recuperar_elecciones_optimas(monedas, valores_acumulados, i, j, monedas_sop
 
         if i == j:
             monedas_sophia.append(monedas[i])
+            jugadas.append(f"Sophia debe agarrar la primera ({monedas[i]}); ")
             return monedas_sophia, monedas_mateo
 
         ultimo = monedas[j]
@@ -73,7 +76,10 @@ def _recuperar_elecciones_optimas(monedas, valores_acumulados, i, j, monedas_sop
 
         if ganancia_esperanza == monedas[i] + valores_acumulados[siguiente_pos][ultimo_pos]:
             eleccion_sophia(monedas, i, monedas_sophia)
-            eleccion_mateo(monedas, i + 1, siguiente_pos, j, monedas_mateo)
+            jugada_sophia = f"Sophia debe agarrar la primera ({monedas[i]}); "
+            jugada_mateo = eleccion_mateo(monedas, i + 1, siguiente_pos, j, monedas_mateo)
+            jugadas.append(jugada_sophia)
+            jugadas.append(jugada_mateo)
             ganancia_esperanza = ajustar_esperanza(ganancia_esperanza, monedas[i]) 
 
         else:
@@ -88,17 +94,24 @@ def _recuperar_elecciones_optimas(monedas, valores_acumulados, i, j, monedas_sop
                 ultimo_pos = j - 1
 
             eleccion_sophia(monedas, j, monedas_sophia)
-            eleccion_mateo(monedas, i, siguiente_pos, j - 1, monedas_mateo)
+            jugada_sophia = f"Sophia debe agarrar la ultima ({monedas[j]}); "
+            jugada_mateo = eleccion_mateo(monedas, i, siguiente_pos, j - 1, monedas_mateo)
+            jugadas.append(jugada_sophia)
+            jugadas.append(jugada_mateo)
             ganancia_esperanza = ajustar_esperanza(ganancia_esperanza, monedas[j])
                                                   
         i, j = siguiente_pos, ultimo_pos
     return monedas_sophia, monedas_mateo
 
 def eleccion_mateo(monedas, pos, siguiente_pos, moneda_elegida_pos, monedas_mateo):
+    jugadas_mateo = ""
     if pos == siguiente_pos:
         monedas_mateo.append(monedas[moneda_elegida_pos])
+        jugadas_mateo = f"Mateo agarra la ultima ({monedas[moneda_elegida_pos]}); "
     else:
         monedas_mateo.append(monedas[pos])
+        jugadas_mateo = f"Mateo agarra la primera ({monedas[pos]}); "
+    return jugadas_mateo
 
 def eleccion_sophia(monedas, eleccion, monedas_sophia):
     monedas_sophia.append(monedas[eleccion])
@@ -106,4 +119,10 @@ def eleccion_sophia(monedas, eleccion, monedas_sophia):
 def ajustar_esperanza(esperanza, ganancia_parcial):
     esperanza -= ganancia_parcial
     return esperanza
+
+def registrar_jugadas(jugadas):
+    jugadas_totales = ""
+    for jugada in jugadas:
+        jugadas_totales += jugada
+    return jugadas_totales[:-2]
 
