@@ -15,10 +15,12 @@ def main():
 def prueba(setDatos):
     archivo = f'pruebas/{setDatos}'  
     monedas = leerMonedasDesdeArchivo(archivo)
-    ganancia_recibida,ganancia_mateo= elegir_monedas(monedas)
+    ganancia_recibida,ganancia_mateo, pasos= elegir_monedas(monedas)
 
     print("ganancia sophia: ")
     print(ganancia_recibida)
+    print("Pasos:")
+    print(pasos)
 
 
 def leerMonedasDesdeArchivo(archivo):
@@ -31,6 +33,7 @@ def leerMonedasDesdeArchivo(archivo):
 def elegir_monedas(monedas):
     sophia_puntuacion = 0
     mateo_puntuacion = 0
+    pasos = []
 
     primer_moneda = 0
     ultima_moneda = len(monedas)-1
@@ -40,20 +43,24 @@ def elegir_monedas(monedas):
         if monedas[primer_moneda] > monedas[ultima_moneda]:
             sophia_puntuacion += monedas[primer_moneda]
             primer_moneda += 1
+            pasos.append(" Primera moneda para Sophia")
         else:
             sophia_puntuacion += monedas[ultima_moneda]
             ultima_moneda -= 1
+            pasos.append(" Última moneda para Sophia")
 
         #Elije sophia para mateo en caso de que siga habiendo monedas
         if primer_moneda <= ultima_moneda:
             if monedas[primer_moneda] < monedas[ultima_moneda]:
                 mateo_puntuacion += monedas[primer_moneda]
                 primer_moneda += 1
+                pasos.append(" Primera moneda para Mateo")
             else:
                 mateo_puntuacion += monedas[ultima_moneda]
                 ultima_moneda -= 1
+                pasos.append(" Última moneda para Mateo")
             
-    return sophia_puntuacion,mateo_puntuacion
+    return sophia_puntuacion,mateo_puntuacion,pasos
 
 
 main()
