@@ -25,8 +25,8 @@ def backtrack(tablero, barcos, fila_demandas, columna_demandas, indice_barco, mi
                     if(len(barcos_usados) -1 == len(barcos)):
                         return min_demanda_incumplida,tablero
                     if(min_demanda_incumplida > 0):
-                        tablero,barcos_usados = quitar_barco(tablero, fila, col, barco, fila_demandas, columna_demandas, orientacion,barcos_usados)
-                        min_demanda_incumplida,tablero = backtrack(tablero, barcos, fila_demandas, columna_demandas, indice_barco + 1, min_demanda_incumplida,barcos_usados)
+                        #tablero,barcos_usados = quitar_barco(tablero, fila, col, barco, fila_demandas, columna_demandas, orientacion,barcos_usados)
+                        #min_demanda_incumplida,tablero = backtrack(tablero, barcos, fila_demandas, columna_demandas, indice_barco + 1, min_demanda_incumplida,barcos_usados)
                
 
                     if min_demanda_incumplida == 0:  
