@@ -16,6 +16,7 @@ def main():
 
     print(f"Tiempo de ejecución: {time} segundos")
     print(f"demanda obtenida : {demanda_cumplida}")
+    print(f"Resultado tablero")
     imprimir_tablero(tablero)
 
 
