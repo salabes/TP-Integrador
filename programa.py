@@ -16,8 +16,13 @@ def main():
 
     print(f"Tiempo de ejecución: {time} segundos")
     print(f"demanda obtenida : {demanda_cumplida}")
+    imprimir_tablero(tablero)
 
 
+def imprimir_tablero(tablero):
+    # Imprime el tablero con los barcos, mostrando el número de barco en lugar de "B"
+    for fila in tablero:
+        print(" ".join(f'{celda}' if celda != 0 else '0' for celda in fila))
 
 
 
